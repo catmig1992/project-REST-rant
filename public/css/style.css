@@ -2,3 +2,12 @@ h1 {
   text-align: center;
   color: cornflowerblue;
 }
+
+p {
+  text-align: center;
+}
+
+img {
+  width: 65%;
+  height: 65%;
+}
