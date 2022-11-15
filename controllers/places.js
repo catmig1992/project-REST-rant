@@ -87,4 +87,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
+//http://localhost:3000/places/undefined?_method=PUT
+//put route is not recognizing index, result is undefined
+
 module.exports = router;
