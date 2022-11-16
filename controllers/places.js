@@ -19,7 +19,7 @@ router.get("/:id/edit", (req, res) => {
   } else if (!places[id]) {
     res.render("error404");
   } else {
-    res.render("places/edit", { place: places[id] });
+    res.render("places/edit", { place: places[id], id });
   }
 });
 
@@ -73,12 +73,14 @@ router.put("/:id", (req, res) => {
 
     // Save the new data into places[id]
     places[id] = req.body;
-    res.redirect(`places/${id}`);
+    res.redirect(`/places/${id}`);
   }
 });
 
-//http://localhost:3000/places/undefined?_method=PUT
-//put route is not recognizing index, result is undefined
+router.post("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  res.redirect(`/places/${id}`);
+});
 
 //DELETE
 router.delete("/:id", (req, res) => {
