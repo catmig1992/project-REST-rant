@@ -6,10 +6,36 @@ router.get("/", (req, res) => {
   res.render("places/index", { places });
 });
 
+//NEW
 router.get("/new", (req, res) => {
   res.render("places/new");
 });
 
+//EDIT
+router.get("/:id/edit", (req, res) => {
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    res.render("places/edit", { place: places[id] });
+  }
+});
+
+// SHOW
+router.get("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    res.render("places/show", { place: places[id], id });
+  }
+});
+
+//CREATE
 router.post("/", (req, res) => {
   if (!req.body.pic) {
     // Default image if one is not provided
@@ -25,43 +51,7 @@ router.post("/", (req, res) => {
   res.redirect("/places");
 });
 
-// SHOW
-router.get("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    res.render("places/show", { place: places[id], id });
-  }
-});
-
-//EDIT
-router.get("/:id/edit", (req, res) => {
-  let id = Number(req.params.id);
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    res.render("places/edit", { place: places[id] });
-  }
-});
-
-//DELETE
-router.delete("/:id", (req, res) => {
-  let id = Number(req.params.id);
-  if (isNaN(id)) {
-    res.render("error404");
-  } else if (!places[id]) {
-    res.render("error404");
-  } else {
-    places.splice(id, 1);
-    res.redirect("/places");
-  }
-});
-
+//UPDATE
 router.put("/:id", (req, res) => {
   let id = Number(req.params.id);
   if (isNaN(id)) {
@@ -83,11 +73,24 @@ router.put("/:id", (req, res) => {
 
     // Save the new data into places[id]
     places[id] = req.body;
-    res.redirect(`/places/${id}`);
+    res.redirect(`places/${id}`);
   }
 });
 
 //http://localhost:3000/places/undefined?_method=PUT
 //put route is not recognizing index, result is undefined
+
+//DELETE
+router.delete("/:id", (req, res) => {
+  let id = Number(req.params.id);
+  if (isNaN(id)) {
+    res.render("error404");
+  } else if (!places[id]) {
+    res.render("error404");
+  } else {
+    places.splice(id, 1);
+    res.redirect("/places");
+  }
+});
 
 module.exports = router;
