@@ -32,7 +32,14 @@ router.get("/new", (req, res) => {
 
 // SHOW
 router.get("/:id", (req, res) => {
-  res.send("GET /places/:id stub");
+  db.Place.findById(req.params.id)
+    .then((place) => {
+      res.render("places/show", { place });
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
 //UPDATE
@@ -85,17 +92,17 @@ module.exports = router;
 //   }
 // });
 
-// // SHOW
-// router.get("/:id", (req, res) => {
-//   let id = Number(req.params.id);
-//   if (isNaN(id)) {
-//     res.render("error404");
-//   } else if (!places[id]) {
-//     res.render("error404");
-//   } else {
-//     res.render("places/show", { place: places[id], id });
-//   }
-// });
+// ..x.. // SHOW
+// ..x.. router.get("/:id", (req, res) => {
+// ..x..  let id = Number(req.params.id);
+// ..x..   if (isNaN(id)) {
+// ..x..    res.render("error404");
+// ..x..   } else if (!places[id]) {
+// ..x..     res.render("error404");
+// ..x..   } else {
+// ..x..     res.render("places/show", { place: places[id], id });
+// ..x..   }
+// ..x.. });
 
 // ..x.. //CREATE
 // ..x.. router.post("/", (req, res) => {
