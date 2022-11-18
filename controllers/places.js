@@ -1,13 +1,28 @@
 const router = require("express").Router();
+const db = require("../models");
 
-// GET /places
+// // GET INDEX ROUTE /places
 router.get("/", (req, res) => {
-  res.send("GET /places stub");
+  db.Place.find()
+    .then((places) => {
+      res.render("places/index", { places });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.render("error404");
+    });
 });
 
 //CREATE
 router.post("/", (req, res) => {
-  res.send("POST /places stub");
+  db.Place.create(req.body)
+    .then(() => {
+      res.redirect("/places");
+    })
+    .catch((err) => {
+      console.log("err", err);
+      res.render("error404");
+    });
 });
 
 //NEW
@@ -45,13 +60,13 @@ router.delete("/:id/rant/:rantId", (req, res) => {
 
 module.exports = router;
 
-// const router = require("express").Router();
-// const places = require("../models/places.js");
+// ..x.. const router = require("express").Router();
+// ..x.. const places = require("../models/places.js");
 
-// // GET /places
-// router.get("/", (req, res) => {
-//   res.render("places/index", { places });
-// });
+// ..x.. // GET /places
+// ..x.. router.get("/", (req, res) => {
+// ..x..  res.render("places/index", { places });
+// ..x.. });
 
 // //NEW
 // router.get("/new", (req, res) => {
@@ -82,8 +97,8 @@ module.exports = router;
 //   }
 // });
 
-// //CREATE
-// router.post("/", (req, res) => {
+// ..x.. //CREATE
+// ..x.. router.post("/", (req, res) => {
 //   if (!req.body.pic) {
 //     // Default image if one is not provided
 //     req.body.pic = "http://placekitten.com/400/400";
@@ -94,9 +109,9 @@ module.exports = router;
 //   if (!req.body.state) {
 //     req.body.state = "USA";
 //   }
-//   places.push(req.body);
-//   res.redirect("/places");
-// });
+// ..x..  places.push(req.body);
+// ..x..  res.redirect("/places");
+// ..x.. });
 
 // //UPDATE
 // router.put("/:id", (req, res) => {
