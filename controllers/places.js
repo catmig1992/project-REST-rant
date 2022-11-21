@@ -106,10 +106,10 @@ module.exports = router;
 
 // ..x.. //CREATE
 // ..x.. router.post("/", (req, res) => {
-//   if (!req.body.pic) {
-//     // Default image if one is not provided
-//     req.body.pic = "http://placekitten.com/400/400";
-//   }
+// ..x..  if (!req.body.pic) {
+// ..x..    // Default image if one is not provided
+// ..x..    req.body.pic = "http://placekitten.com/400/400";
+// ..x..  }
 //   if (!req.body.city) {
 //     req.body.city = "Anytown";
 //   }
