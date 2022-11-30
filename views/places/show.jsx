@@ -15,7 +15,7 @@ function show(data) {
     for (let i = 0; i < averageRating; i++) {
       stars += "⭐";
     }
-    rating = <h3>{stars} stars</h3>;
+    rating = <h3>{stars}</h3>;
     comments = data.place.comments.map((c) => {
       return (
         <div className="border">
@@ -47,10 +47,16 @@ function show(data) {
             <h2>Description</h2>
             <h3>{data.place.showEstablished()}</h3>
             <h4>Serving {data.place.cuisines}</h4>
-            <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+            <a
+              href={`/places/${data.place.id}/edit`}
+              className="btn btn-warning"
+            >
               Edit
             </a>
-            <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+            <form
+              method="POST"
+              action={`/places/${data.place.id}?_method=DELETE`}
+            >
               <button type="submit" className="btn btn-danger">
                 Delete
               </button>
