@@ -59,7 +59,20 @@ function edit_form(data) {
               required
             />
           </div>
-          <input className="btn btn-primary" type="submit" value="Add Place" />
+          <div className="form-group col-sm-4">
+            <label htmlFor="founded">Founded</label>
+            <input
+              className="form-control"
+              id="founded"
+              name="founded"
+              value={data.place.founded}
+            />
+          </div>
+          <input
+            className="btn btn-primary"
+            type="submit"
+            value="Update Place"
+          />
         </form>
       </main>
     </Def>
