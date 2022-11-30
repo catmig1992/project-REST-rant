@@ -77,6 +77,8 @@ function show(data) {
               className="form-control"
               id="stars"
               name="stars"
+              min={0.5}
+              max={5}
               step={0.5}
               value={5}
             />
